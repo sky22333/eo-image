@@ -1,198 +1,234 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>随机图片 API</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
-            html,
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>随机图片 API</title>
+    <meta name="description" content="基于 EdgeOne Pages 的随机图片 API 服务" />
+    <style>
+        :root {
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --accent-color: #2563eb;
+            --bg-color: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --code-bg: #f9fafb;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-primary: #f9fafb;
+                --text-secondary: #9ca3af;
+                --accent-color: #60a5fa;
+                --bg-color: #0f172a;
+                --bg-secondary: #1e293b;
+                --border-color: #334155;
+                --code-bg: #1e293b;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: grid;
+            gap: 3rem;
+        }
+
+        /* Header Section */
+        header {
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.05rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* API Section */
+        .api-section {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .section-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .code-box {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-family: "Menlo", "Monaco", "Consolas", monospace;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .code-box:hover {
+            border-color: var(--accent-color);
+        }
+
+        .method {
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        .url {
+            word-break: break-all;
+            flex: 1;
+        }
+
+        /* Categories Section */
+        .categories-section {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .category-tag {
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .category-tag:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Footer Links */
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
             body {
-                margin: 0;
-                color: #424242;
-                font-weight: 300;
-                font-family: "-apple-system", "BlinkMacSystemFont", "Helvetica Neue", "PingFang SC", "Microsoft YaHei",
-                    "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", "sans-serif";
-                font-size: 16px;
+                padding: 1.5rem;
+                justify-content: flex-start;
             }
-
-            * {
-                box-sizing: border-box;
-            }
-
-            header {
-                padding: 40vh 0 8vh 0;
-                text-align: center;
-                font-weight: 100;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-between;
-                height: 100vh;
-                overflow: hidden;
-                background-image: url('./images/pc/cp.webp');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-            }
-
-            h1,
-            h3 {
-                color: rgba(255, 255, 255, 0.9);
-                text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-                font-weight: bold;
-                margin: 0;
-            }
-
+            
             h1 {
-                font-size: 3.5rem;
-            }
-
-            h2 {
                 font-size: 2rem;
-                font-weight: 300;
-                margin-top: 2rem;
-            }
-
-            h3 {
-                font-size: 1.5rem;
-                font-weight: 300;
-            }
-
-            #scroll-down {
-                background-color: transparent;
-                margin-top: 2rem;
-                width: 2rem;
-                height: 2rem;
-                border-radius: 50%;
-                border: 2px solid #fff;
-                cursor: pointer;
-                animation: bounce 2s infinite 2s;
-            }
-
-            #scroll-down::before {
-                display: block;
-                content: "";
-                transform: rotate(-45deg) translate(0.15rem, 0.15rem);
-                width: 0.4rem;
-                height: 0.4rem;
-                border: 2px solid #fff;
-                border-width: 0px 0 2px 2px;
-            }
-
-            a {
-                text-decoration: none;
-                color: #79c37c;
-            }
-
-            main {
-                padding: 2rem 1rem;
-                max-width: 800px;
-                margin: 0 auto;
-            }
-
-            section {
-                padding: 1rem;
-                background: #fff;
-            }
-
-            .category-list {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                justify-content: center;
-                margin-top: 1rem;
-            }
-
-            .category-tag {
-                background: #eee;
-                padding: 5px 15px;
-                border-radius: 20px;
-                color: #555;
-                font-size: 0.9rem;
-                transition: background 0.2s;
             }
             
-            .category-tag:hover {
-                background: #ddd;
-                color: #333;
+            .container {
+                gap: 2rem;
             }
 
-            footer {
-                padding: 2rem;
-                text-align: center;
-                background-color: #f5f5f5;
-                color: #888;
+            .footer-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
-
-            footer a {
-                color: #666;
-            }
-
-            footer a:hover {
-                text-decoration: underline;
-            }
-
-            @keyframes bounce {
-                0%, 100%, 20%, 50%, 80% { transform: translateY(0); }
-                40% { transform: translateY(-10px); }
-                60% { transform: translateY(-5px); }
-            }
-            
-            code {
-                background: #f4f4f4;
-                padding: 2px 5px;
-                border-radius: 3px;
-                font-family: monospace;
-            }
-        </style>
-    </head>
-
-    <body>
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
         <header>
-            <section style="background: transparent;">
-                <h1>随机图片 API</h1>
-                <h3>多种分类 · 快速响应</h3>
-            </section>
-            <button id="scroll-down"></button>
+            <h1>随机图片 API</h1>
+            <p class="subtitle">基于 EdgeOne Pages 的高性能随机图片分发服务</p>
         </header>
-        <main>
-            <section>
-                <h2>接口说明</h2>
-                <p>
-                    域名: <code id="base-url">https://example.com</code>
-                </p>
-                <p>
-                    <strong>获取指定分类的随机图片</strong><br>
-                    访问: <code>/api/{分类名}</code>
-                </p>
-                
-                <h3>可用分类</h3>
-                <div class="category-list">
-                    <a href="./api/fox" class="category-tag">fox</a>
-                    <a href="./api/furina" class="category-tag">furina</a>
-                    <a href="./api/moe" class="category-tag">moe</a>
-                    <a href="./api/pc" class="category-tag">pc</a>
-                    <a href="./api/pm" class="category-tag">pm</a>
-                    <a href="./api/mobi" class="category-tag">mobi</a>
-                    <a href="./api/wife" class="category-tag">wife</a>
-                    <a href="./api/girl" class="category-tag">girl</a>
+
+        <div class="api-section">
+            <div class="section-label">接口地址</div>
+            <div class="code-box">
+                <div>
+                    <span class="method">GET</span>
+                    <span class="url"><span id="base-url">https://example.com</span>/api/{分类名}</span>
                 </div>
+            </div>
+        </div>
 
-                <h3>其他链接</h3>
-                <p>
-                    <a href="./images/index.html">查看图片索引页</a>
-                </p>
-            </section>
-        </main>
-        <script>
-            document.getElementById("base-url").textContent = location.origin;
-            
-            document.getElementById("scroll-down").addEventListener("click", function () {
-                document.querySelector("main").scrollIntoView({
-                    behavior: "smooth",
-                });
-            });
-        </script> 
+        <div class="categories-section">
+            <div class="section-label">可用分类</div>
+            <!-- 构建脚本自动生成 -->
+            <div class="category-list">
+                    <a href="./api/girl" class="category-tag">girl</a>
+                    <a href="./api/mobi" class="category-tag">mobi</a>
+                    <a href="./api/pc" class="category-tag">pc</a>
+                </div>
+        </div>
 
-    </body>
+        <footer class="footer-links">
+            <a href="./images/index.html" class="footer-link">浏览图片索引</a>
+            <a href="https://edgeone.ai/zh" target="_blank" class="footer-link">由 EdgeOne 强力驱动</a>
+        </footer>
+    </div>
+
+    <script>
+        const origin = location.origin;
+        document.getElementById("base-url").textContent = origin;
+    </script>
+</body>
 </html>

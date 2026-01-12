@@ -1,5 +1,5 @@
 export function onRequestGet(context) {
-  const imagesMap = {"girl":["girl/1620171137327.webp","girl/1623904139568.webp","girl/1623905002587.webp"],"mobi":["mobi/2000PXA%E5%A3%81%E7%BA%B81.webp","mobi/2000PXA%E5%A3%81%E7%BA%B82.webp","mobi/2000PXA%E5%A3%81%E7%BA%B83.webp"],"pc":["pc/cp.webp","pc/cp1.webp","pc/cp3.webp"]};
+  // __IMAGES_MAP_PLACEHOLDER__
   
   let category = null;
 
@@ -16,6 +16,7 @@ export function onRequestGet(context) {
   if (category && imagesMap[category]) {
     list = imagesMap[category];
   } else {
+    // 默认：所有图片
     Object.values(imagesMap).forEach(arr => list.push(...arr));
   }
 
