@@ -16,6 +16,7 @@ export function onRequestGet(context) {
   if (category && imagesMap[category]) {
     list = imagesMap[category];
   } else {
+    // 默认：所有图片
     Object.values(imagesMap).forEach(arr => list.push(...arr));
   }
 

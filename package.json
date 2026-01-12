@@ -2,7 +2,7 @@
   "name": "eo-image",
   "version": "1.0.0",
   "scripts": {
-    "build": "node generate-image-urls.js"
+    "build": "node build.js"
   },
   "dependencies": {}
 }
