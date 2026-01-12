@@ -1,5 +1,5 @@
 export function onRequestGet(context) {
-  const imagesMap = {"fox":["fox/001.png","fox/002.png","fox/003.png"],"furina":["furina/mmexport1746786751720.webp","furina/mmexport1746786759112.webp","furina/mmexport1746786767584.webp"],"girl":["girl/1620171137327.webp","girl/1623904139568.webp","girl/1623905002587.webp"],"mobi":["mobi/2000PXA%E5%A3%81%E7%BA%B81.webp","mobi/2000PXA%E5%A3%81%E7%BA%B82.webp","mobi/2000PXA%E5%A3%81%E7%BA%B83.webp"],"moe":["moe/66505f8e72fb4.webp","moe/66505f8eb5f12.webp","moe/66505f91b1fbf.webp"],"pc":["pc/cp.webp","pc/cp1.webp","pc/cp3.webp"],"pm":["pm/005.webp","pm/016.webp","pm/021.webp"],"wife":["wife/Arcaea-%E5%85%89.jpg","wife/Ringo-chan.jpg","wife/%E9%98%BF%E7%BA%B3%E6%96%AF%E5%A1%94%E8%A5%BF%E4%BA%9A.png"]};
+  const imagesMap = {"girl":["girl/1620171137327.webp","girl/1623904139568.webp","girl/1623905002587.webp"],"mobi":["mobi/2000PXA%E5%A3%81%E7%BA%B81.webp","mobi/2000PXA%E5%A3%81%E7%BA%B82.webp","mobi/2000PXA%E5%A3%81%E7%BA%B83.webp"],"pc":["pc/cp.webp","pc/cp1.webp","pc/cp3.webp"]};
   let category = null;
 
   // 获取分类
